@@ -1,617 +1,542 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSBJK | Himanshu Sharma</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HSBJK | Himanshu Sharma</title>
-<link rel="icon" href="favicon.png" type="image/png">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-<style>
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px; /* Dynamic offset for desktop header scroll */
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Poppins;
-}
+        body {
+            background: #0f172a;
+            color: white;
+            overflow-x: hidden;
+        }
 
-body{
-background:#0f172a;
-color:white;
-scroll-behavior:smooth;
-overflow-x:hidden;
-}
+        /* progress bar */
+        #progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: #38bdf8;
+            width: 0%;
+            z-index: 9999;
+        }
 
-/* progress bar */
+        /* particles */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
 
-#progress{
-position:fixed;
-top:0;
-left:0;
-height:4px;
-background:#38bdf8;
-width:0%;
-z-index:9999;
-}
+        /* header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 8%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
 
-/* particles */
+        /* logo */
+        .logo img {
+            height: 70px;
+            filter: drop-shadow(0 0 10px #38bdf8);
+        }
 
-#particles{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-z-index:-1;
-}
+        .logo-img {
+            width: 200px;
+            height: auto;
+        }
 
-/* header */
+        /* navbar */
+        nav a {
+            margin-left: 25px;
+            text-decoration: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
 
-header{
-position:fixed;
-top:0;
-width:100%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:15px 8%;
-background:rgba(0,0,0,0.5);
-backdrop-filter:blur(10px);
-z-index:1000;
-}
+        nav a:hover {
+            color: #38bdf8;
+            box-shadow: 0 0 15px #38bdf8;
+        }
 
-/* logo */
+        /* hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10%;
+        }
 
-.logo img{
-height:70px;
-filter:drop-shadow(0 0 10px #38bdf8);
-}
+        .hero h1 {
+            font-size: 55px;
+        }
 
-/* navbar */
+        .hero span {
+            color: #38bdf8;
+        }
 
-nav a{
-margin-left:25px;
-text-decoration:none;
-color:white;
-padding:6px 12px;
-border-radius:6px;
-transition:0.3s;
-}
+        .hero img {
+            width: 520px;
+            border-radius: 20px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, .6);
+        }
 
-nav a:hover{
-color:#38bdf8;
-box-shadow:0 0 15px #38bdf8;
-}
+        .typing {
+            color: #38bdf8;
+            font-size: 20px;
+            margin-top: 10px;
+            min-height: 30px;
+        }
 
-/* hero */
+        /* button glow */
+        .btn {
+            padding: 12px 35px;
+            background: #38bdf8;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            color: black;
+            margin-top: 20px;
+            box-shadow: 0 0 20px #38bdf8;
+            transition: 0.3s;
+            font-weight: 600;
+            display: inline-block;
+            text-decoration: none;
+        }
 
-.hero{
-height:100vh;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 10%;
-}
+        .btn:hover {
+            box-shadow: 0 0 40px #38bdf8;
+            transform: translateY(-3px);
+        }
 
-.hero h1{
-font-size:55px;
-}
+        /* sections */
+        section {
+            padding: 120px 10%;
+        }
 
-.hero span{
-color:#38bdf8;
-}
+        /* parallax */
+        .parallax {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url("HSBJK_logo.png") center/cover fixed;
+            font-size: 55px;
+            color: #38bdf8;
+            text-shadow: 0 0 20px #38bdf8;
+            letter-spacing: 5px;
+            font-weight: 600;
+        }
 
-.hero img{
-width:520px;
-border-radius:20px;
-box-shadow:0 40px 80px rgba(0,0,0,.6);
-}
+        /* skills */
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
 
-.typing{
-color:#38bdf8;
-font-size:20px;
-margin-top:10px;
-}
+        .skill {
+            background: #111827;
+            padding: 25px;
+            border-radius: 15px;
+            transition: 0.3s;
+        }
 
-/* button glow */
+        .skill:hover {
+            transform: translateY(-10px);
+        }
 
-.btn{
-padding:12px 35px;
-background:#38bdf8;
-border:none;
-border-radius:30px;
-cursor:pointer;
-color:black;
-margin-top:20px;
-box-shadow:0 0 20px #38bdf8;
-transition:0.3s;
-}
+        /* projects */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
 
-.btn:hover{
-box-shadow:0 0 40px #38bdf8;
-transform:translateY(-3px);
-}
+        .project {
+            background: #111827;
+            padding: 30px;
+            border-radius: 15px;
+            transition: 0.3s;
+        }
 
-/* sections */
+        .project:hover {
+            transform: scale(1.05);
+        }
 
-section{
-padding:120px 10%;
-}
+        /* gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
 
-/* parallax */
+        .gallery img {
+            width: 100%;
+            border-radius: 15px;
+        }
 
-.parallax{
-height:80vh;
-display:flex;
-align-items:center;
-justify-content:center;
-background:url("HSBJK_logo.png") center/cover fixed;
-font-size:55px;
-color:#38bdf8;
-text-shadow:0 0 20px #38bdf8;
-letter-spacing:5px;
-}
+        /* social */
+        .social-links {
+            display: flex;
+            gap: 25px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
 
-/* skills */
+        .social-links a {
+            padding: 12px 25px;
+            background: #111827;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white;
+            transition: 0.3s;
+        }
 
-.skills{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:25px;
-margin-top:40px;
-}
+        .social-links a:hover {
+            box-shadow: 0 0 20px #38bdf8;
+            color: #38bdf8;
+        }
 
-.skill{
-background:#111827;
-padding:25px;
-border-radius:15px;
-transition:0.3s;
-}
+        /* footer */
+        footer {
+            background: #020617;
+            text-align: center;
+            padding: 30px;
+            color: #94a3b8;
+        }
 
-.skill:hover{
-transform:translateY(-10px);
-}
+        /* MOBILE RESPONSIVE CHANGES */
+        @media (max-width: 768px) {
+            html {
+                scroll-padding-top: 240px; /* Offset to align targets below the tall mobile menu */
+            }
 
-/* projects */
+            header {
+                flex-direction: column;
+                gap: 10px;
+                padding: 15px 5%;
+            }
 
-.projects{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:30px;
-margin-top:40px;
-}
+            nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
 
-.project{
-background:#111827;
-padding:30px;
-border-radius:15px;
-transition:0.3s;
-}
+            nav a {
+                margin: 8px;
+                font-size: 14px;
+                margin-left: 0;
+            }
 
-.project:hover{
-transform:scale(1.05);
-}
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                height: auto;
+                padding-top: 240px; /* Completely solves the overlap bug by shifting hero content below mobile header */
+                padding-bottom: 60px;
+            }
 
-/* gallery */
+            .hero h1 {
+                font-size: 36px;
+            }
 
-.gallery{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:30px;
-}
+            .hero img {
+                width: 90%;
+                margin-top: 30px;
+            }
 
-.gallery img{
-width:100%;
-border-radius:15px;
-}
+            .parallax {
+                font-size: 32px;
+                text-align: center;
+                padding: 40px 20px;
+                height: auto;
+                min-height: 40vh;
+            }
 
-/* social */
+            .skills {
+                grid-template-columns: 1fr;
+            }
 
-.social-links{
-display:flex;
-gap:25px;
-margin-top:30px;
-flex-wrap:wrap;
-}
+            .projects {
+                grid-template-columns: 1fr;
+            }
 
-.social-links a{
-padding:12px 25px;
-background:#111827;
-border-radius:8px;
-text-decoration:none;
-color:white;
-transition:0.3s;
-}
+            .gallery {
+                grid-template-columns: 1fr;
+            }
 
-.social-links a:hover{
-box-shadow:0 0 20px #38bdf8;
-color:#38bdf8;
-}
-
-/* footer */
-
-footer{
-background:#020617;
-text-align:center;
-padding:30px;
-}
-
-/* MOBILE RESPONSIVE */
-
-@media (max-width:768px){
-
-header{
-flex-direction:column;
-gap:10px;
-}
-
-nav{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-}
-
-nav a{
-margin:8px;
-}
-
-.hero{
-flex-direction:column;
-text-align:center;
-height:auto;
-padding-top:120px;
-}
-
-.hero h1{
-font-size:36px;
-}
-
-.hero img{
-width:90%;
-margin-top:30px;
-}
-
-.parallax{
-font-size:32px;
-text-align:center;
-padding:40px 20px;
-}
-
-.skills{
-grid-template-columns:1fr;
-}
-
-.projects{
-grid-template-columns:1fr;
-}
-
-.gallery{
-grid-template-columns:1fr;
-}
-
-.social-links{
-justify-content:center;
-}
-
-}
-
-</style>
-
+            .social-links {
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div id="progress"></div>
-<canvas id="particles"></canvas>
-
-<header>
-
-<div class="logo">
-<img src="HSBJK_logo.png" class="logo-img">
-</div>
-
-<style>
-.logo-img{
-width:200px;
-height:auto;
-}
-</style>
-
-<nav>
-<a href="#">Home</a>
-<a href="#about">About</a>
-<a href="#skills">Skills</a>
-<a href="#projects">Projects</a>
-<a href="#social">Social</a>
-<a href="#contact">Contact</a>
-</nav>
-
-</header>
-
-<section class="hero">
-
-<div>
-
-<h1>Hello I'm <span>Himanshu Sharma</span></h1>
-
-<div class="typing" id="typing"></div>
-
-<p style="margin-top:15px">
-Founder of HSBJK • AI / ML Student • Developer
-</p>
-
-<button class="btn">View Portfolio</button>
-
-</div>
-
-<img src="desk.png">
-
-</section>
-
-<section class="parallax">
-BUILD • CREATE • INNOVATE
-</section>
-
-<section id="about">
-
-<h2>About Me</h2>
-
-<p style="margin-top:20px">
-I am Himanshu Sharma, a B.Tech AI & ML student from JCDM College of Engineering.
-Through my brand HSBJK I build modern websites, tools and digital platforms.
-</p>
-
-</section>
-
-<section id="skills">
-
-<h2>Skills</h2>
-
-<div class="skills">
-
-<div class="skill">HTML / CSS</div>
-<div class="skill">JavaScript</div>
-<div class="skill">Python</div>
-<div class="skill">Machine Learning</div>
-<div class="skill">Web Development</div>
-
-</div>
-
-</section>
-
-<section id="projects">
-
-<h2>My Projects</h2>
-
-<div class="projects">
-
-<div class="project">
-
-<h3>HSBJK Image PDF Studio</h3>
-
-<p>
-A web application that allows users to convert images into PDF files quickly and easily.
-It supports multiple images and generates a professional PDF document instantly.
-</p>
-
-<a href="https://hsbjk2.github.io/HSBJK-Image-PDF-Studio/" target="_blank">
-<button class="btn">Visit Project</button>
-</a>
-
-</div>
-
-<div class="project">
-
-<h3>CalcLogic Official Page</h3>
-
-<p>
-A modern calculator platform built with clean UI design that helps users perform
-calculations easily while demonstrating advanced front-end development techniques.
-</p>
-
-<a href="https://hsbjk2.github.io/CalcLogic-Official-Page-/" target="_blank">
-<button class="btn">Visit Project</button>
-</a>
-
-</div>
-
-<div class="project">
-
-<h3>HSBJK Wallify</h3>
-
-<p>
-A wallpaper platform designed to provide high quality wallpapers
-with fast loading and a smooth browsing experience.
-</p>
-
-<a href="https://hsbjk-wallify.vercel.app//" target="_blank">
-<button class="btn">Visit Project</button>
-</a>
-
-</div>
-
-<div class="project">
-
-<h3>HSBJK Video Studio</h3>
-
-<p>
-A multimedia platform hosted on GitHub that organizes video content
-and demonstrates structured web design and deployment.
-</p>
-
-<a href="https://hsbjk2.github.io/main-page-of-HSBJK-video-studio/">
-<button class="btn">Visit Project</button>
-</a>
-
-</div>
-<div class="project">
-
-<h3>HSBJK — Keyboard Diagnostics Suite
-</h3>
-
-<p>
-free browser-based keyboard diagnostics platform for checking keys, measuring typing speed, testing combinations, verifying rollover, and analyzing repeat rate in real time.
-</p>
-<a href="https://hsbjk-keyboard-diagnostics.vercel.app/" target="_blank">
-<button class="btn">Visit Project</button>
-</a>
-
-</div>
-  <div class="project">
-
-<h3>QRCloud: QR & Barcode Studio</h3>
-
-<p>
-QRCloud is an all-in-one platform for creating, scanning, managing, and analyzing QR codes and barcodes effortlessly.
-</p>
-
-<a href="https://qrcloud.vercel.app//">
-<button class="btn">Visit Project</button>
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-<section>
-
-<h2>Gallery</h2>
-
-<div class="gallery">
-
-<img src="hero.png">
-<img src="desk.png">
-
-</div>
-
-</section>
-
-<section id="social">
-
-<h2>Connect With Me</h2>
-
-<div class="social-links">
-
-<a href="https://www.youtube.com/@hsbjkindia">YouTube</a> <a href="https://www.instagram.com/himanshubajekan/">Instagram</a> <a href="https://www.linkedin.com/in/himanshubajekan/">LinkedIn</a> <a href="https://github.com/hsbjk2">GitHub</a>
-
-</div>
-
-</section>
-
-<section id="contact">
-
-<h2>Contact</h2>
-
-<p style="margin-top:20px">Email: support.hsbjk@gmail.com</p>
-
-<a href="mailto:support.hsbjk@gmail.com">
-<button class="btn">Send Message</button>
-</a>
-
-</section>
-
-<footer>
-
-HSBJK © 2026 • Built by Himanshu Sharma
-
-</footer>
-
-<script>
-
-/* typing animation */
-
-const words=["Developer","Creator","AI / ML Student","Founder of HSBJK"]
-
-let i=0
-let j=0
-let deleting=false
-
-function type(){
-
-let word=words[i]
-
-document.getElementById("typing").textContent=word.substring(0,j)
-
-if(!deleting && j++===word.length){
-
-deleting=true
-setTimeout(type,1000)
-return
-
-}
-
-if(deleting && j--===0){
-
-deleting=false
-i=(i+1)%words.length
-
-}
-
-setTimeout(type,deleting?50:100)
-
-}
-
-type()
-
-/* progress bar */
-
-window.onscroll=()=>{
-
-let winScroll=document.body.scrollTop||document.documentElement.scrollTop
-let height=document.documentElement.scrollHeight-document.documentElement.clientHeight
-document.getElementById("progress").style.width=(winScroll/height*100)+"%"
-
-}
-
-/* particles */
-
-const canvas=document.getElementById("particles")
-const ctx=canvas.getContext("2d")
-
-canvas.width=window.innerWidth
-canvas.height=window.innerHeight
-
-let particles=[]
-
-for(let i=0;i<80;i++){
-
-particles.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-r:Math.random()*2
-})
-
-}
-
-function draw(){
-
-ctx.clearRect(0,0,canvas.width,canvas.height)
-
-particles.forEach(p=>{
-
-ctx.beginPath()
-ctx.arc(p.x,p.y,p.r,0,Math.PI*2)
-ctx.fillStyle="#38bdf8"
-ctx.fill()
-
-p.y+=0.3
-
-if(p.y>canvas.height)p.y=0
-
-})
-
-requestAnimationFrame(draw)
-
-}
-
-draw()
-
-</script>
+    <div id="progress"></div>
+    <canvas id="particles"></canvas>
+
+    <header>
+        <div class="logo">
+            <img src="HSBJK_logo.png" class="logo-img" alt="HSBJK Logo">
+        </div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#social">Social</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div>
+            <h1>Hello I'm <span>Himanshu Sharma</span></h1>
+            <div class="typing" id="typing"></div>
+            <p style="margin-top:15px">
+                Founder of HSBJK • AI / ML Student • Developer
+            </p>
+            <a href="#projects" class="btn">View Portfolio</a>
+        </div>
+        <img src="desk.png" alt="Developer Setup illustration">
+    </section>
+
+    <section class="parallax">
+        BUILD • CREATE • INNOVATE
+    </section>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p style="margin-top:20px">
+            I am Himanshu Sharma, a B.Tech AI & ML student from JCDM College of Engineering.
+            Through my brand HSBJK I build modern websites, tools and digital platforms.
+        </p>
+    </section>
+
+    <section id="skills">
+        <h2>Skills</h2>
+        <div className="skills">
+            <div class="skill">HTML / CSS</div>
+            <div class="skill">JavaScript</div>
+            <div class="skill">Python</div>
+            <div class="skill">Machine Learning</div>
+            <div class="skill">Web Development</div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>My Projects</h2>
+        <div class="projects">
+            <div class="project">
+                <h3>HSBJK Image PDF Studio</h3>
+                <p>
+                    A web application that allows users to convert images into PDF files quickly and easily.
+                    It supports multiple images and generates a professional PDF document instantly.
+                </p>
+                <a href="https://hsbjk2.github.io/HSBJK-Image-PDF-Studio/" target="_blank" rel="noreferrer">
+                    <button class="btn">Visit Project</button>
+                </a>
+            </div>
+
+            <div class="project">
+                <h3>CalcLogic Official Page</h3>
+                <p>
+                    A modern calculator platform built with clean UI design that helps users perform
+                    calculations easily while demonstrating advanced front-end development techniques.
+                </p>
+                <a href="https://hsbjk2.github.io/CalcLogic-Official-Page-/" target="_blank" rel="noreferrer">
+                    <button class="btn">Visit Project</button>
+                </a>
+            </div>
+
+            <div class="project">
+                <h3>HSBJK Wallify</h3>
+                <p>
+                    A wallpaper platform designed to provide high quality wallpapers
+                    with fast loading and a smooth browsing experience.
+                </p>
+                <a href="https://hsbjk-wallify.vercel.app/" target="_blank" rel="noreferrer">
+                    <button class="btn">Visit Project</button>
+                </a>
+            </div>
+
+            <div class="project">
+                <h3>HSBJK Video Studio</h3>
+                <p>
+                    A multimedia platform hosted on GitHub that organizes video content
+                    and demonstrates structured web design and deployment.
+                </p>
+                <a href="https://hsbjk2.github.io/main-page-of-HSBJK-video-studio/" target="_blank" rel="noreferrer">
+                    <button class="btn">Visit Project</button>
+                </a>
+            </div>
+
+            <div class="project">
+                <h3>HSBJK — Keyboard Diagnostics Suite</h3>
+                <p>
+                    Free browser-based keyboard diagnostics platform for checking keys, measuring typing speed, testing combinations, verifying rollover, and analyzing repeat rate in real time.
+                </p>
+                <a href="https://hsbjk-keyboard-diagnostics.vercel.app/" target="_blank" rel="noreferrer">
+                    <button class="btn">Visit Project</button>
+                </a>
+            </div>
+
+            <div class="project">
+                <h3>QRCloud: QR & Barcode Studio</h3>
+                <p>
+                    QRCloud is an all-in-one platform for creating, scanning, managing, and analyzing QR codes and barcodes effortlessly.
+                </p>
+                <a href="https://qrcloud.vercel.app/" target="_blank" rel="noreferrer">
+                    <button class="btn">Visit Project</button>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Gallery</h2>
+        <div class="gallery">
+            <img src="hero.png" alt="Hero Concept Logo">
+            <img src="desk.png" alt="Development Setup Illustration">
+        </div>
+    </section>
+
+    <section id="social">
+        <h2>Connect With Me</h2>
+        <div class="social-links">
+            <a href="https://www.youtube.com/@hsbjkindia" target="_blank" rel="noreferrer">YouTube</a> 
+            <a href="https://www.instagram.com/himanshubajekan/" target="_blank" rel="noreferrer">Instagram</a> 
+            <a href="https://www.linkedin.com/in/himanshubajekan/" target="_blank" rel="noreferrer">LinkedIn</a> 
+            <a href="https://github.com/hsbjk2" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p style="margin-top:20px">Email: support.hsbjk@gmail.com</p>
+        <a href="mailto:support.hsbjk@gmail.com">
+            <button class="btn">Send Message</button>
+        </a>
+    </section>
+
+    <footer>
+        HSBJK © 2026 • Built by Himanshu Sharma
+    </footer>
+
+    <script>
+        /* typing animation */
+        const words = ["Developer", "Creator", "AI / ML Student", "Founder of HSBJK"];
+        let i = 0;
+        let j = 0;
+        let deleting = false;
+
+        function type() {
+            let word = words[i];
+            document.getElementById("typing").textContent = word.substring(0, j);
+
+            if (!deleting && j++ === word.length) {
+                deleting = true;
+                setTimeout(type, 1000);
+                return;
+            }
+
+            if (deleting && j-- === 0) {
+                deleting = false;
+                i = (i + 1) % words.length;
+            }
+
+            setTimeout(type, deleting ? 50 : 100);
+        }
+
+        type();
+
+        /* progress bar */
+        window.onscroll = () => {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            document.getElementById("progress").style.width = (winScroll / height * 100) + "%";
+        }
+
+        /* particles background */
+        const canvas = document.getElementById("particles");
+        const ctx = canvas.getContext("2d");
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particles = [];
+
+        for (let i = 0; i < 80; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 2
+            });
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = "#38bdf8";
+                ctx.fill();
+
+                p.y += 0.3;
+
+                if (p.y > canvas.height) {
+                    p.y = 0;
+                    p.x = Math.random() * canvas.width;
+                }
+            });
+
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        draw();
+    </script>
 
 </body>
 </html>
